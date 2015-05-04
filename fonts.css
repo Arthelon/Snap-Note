@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "Arvo";
+  font-weight: normal;
+  src: local("Arvo"), url(/fonts/Arvo-Regular-webfont.woff) format("woff");
+}
+@font-face {
+  font-family: "Open Sans";
+  font-weight: 800;
+  src: local("Open Sans"), url(/fonts/OpenSans-Regular-webfont.woff) format("woff");
+}
+@font-face {
+  font-family: "Pontano Sans";
+  font-weight: normal;
+  src: local("Pontano Sans"), url(/fonts/PontanoSans-Regular-webfont.woff) format("woff");
+}
+@font-face {
+  font-family: "PT Sans";
+  font-weight: normal;
+  src:local("PT Sans"), url(/fonts/PTS55F-webfont.woff) format("woff");
+}
+@font-face {
+  font-family: "Crimson Text";
+  font-weight: normal;
+  src:local("Crimson Text"), url(/fonts/CrimsonText-Regular.ttf) format("ttf");
+}
+@font-face {
+  font-family: "Lato"
+  font-weight: normal;
+  src:local("Lato"), url(/fonts/Lato-Regular-webfont.woff) format("woff");
+}

@@ -1,0 +1,27 @@
+{
+    "name": "Notepad V1.",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "",
+    "offline_enabled": true,
+    "background": {
+     "scripts": [
+         "js/background.js"
+           ]
+    },
+    "icons": { "16": "android-16.png",
+           "48": "android-48.png",
+          "128": "android-128.png"
+    },
+    "browser_action": {
+        "default_icon" : "android-128.png",
+        "default_title": "",
+        "default_popup": "index.html"
+    },
+    "permissions": [
+        "background", "unlimitedStorage", "tabs"
+    ],
+    "web_accessible_resources": [
+    "index.html","js/popup.js"
+    ]
+}
