@@ -9,9 +9,9 @@
          "js/background.js"
            ]
     },
-    "icons": { "16": "android-16.png",
-           "48": "android-48.png",
-          "128": "android-128.png"
+    "icons": { "16": "images/noteIcon-16.png",
+           "48": "images/noteIcon-48.png",
+          "128": "images/noteIcon.png"
     },
     "browser_action": {
         "default_icon" : "android-128.png",
