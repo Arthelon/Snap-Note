@@ -173,7 +173,15 @@ noteArray[0][1] = "";
 
     //Autosave function
     function storeData() {
-      noteArray[parseInt(localStorage.getItem("noteNum"))][1] = txt.value;
+      if (noteArray.length === 0) {
+        noteArray = [[]];
+        noteArray[0][0] = 1;
+        noteArray[0][1] = "";
+        init2();
+      }
+      console.log(noteArray);
+      noteNum = parseInt(localStorage.getItem("noteNum"));
+      noteArray[noteNum][1] = txt.value; //noteNum undefined?s
       localStorage.setItem("fstyle", txt.style.fontFamily);
       localStorage.setItem("fsize", txt.style.fontSize);
       localStorage.setItem("theme", document.body.style.backgroundColor);
@@ -190,12 +198,7 @@ noteArray[0][1] = "";
       //txt.style.height = parseInt(txt.scrollHeight) + 'px';
     }
     function init() {
-      if (noteArray === null) {
-        noteArray = [[]];
-        noteArray[0][0] = 1;
-        noteArray[0][1] = "";
-        storeData();
-      }
+      console.log("hi");
       noteArray = JSON.parse(localStorage.getItem("notes"));
       $("#plus").click(function() {
         noteArray.push([parseInt(noteArray[noteArray.length - 1]) + 1,""]);
@@ -207,8 +210,9 @@ noteArray[0][1] = "";
         for(var i = 0; i < noteArray.length; i++) { //indexOf does not work for multi-dimensional arrays
           if(noteArray[i][0] == $liID) {
             noteNum = i;
+            localStorage.setItem("noteNum", noteNum);
+            txt.value = noteArray[noteNum][1];
           }
-          console.log(noteArray);
         }
       });
       $("#delete").click(function() {
@@ -227,13 +231,14 @@ noteArray[0][1] = "";
             noteArray.splice(noteDelete, 1);
             if (noteDelete < noteNum) {
               noteNum--;
-            } //else if (noteNum == noteDelete)
+            } else if (noteNum == noteDelete) {
+              noteNum = 0;
+            }
           });
         }
-        init();
       });
-      localStorage.setItem("noteNum", noteNum);
       noteNum = parseInt(localStorage.getItem("noteNum"));
+      // txt.value = parseInt(localStorage.getItem("noteNum"));
       txt.value = noteArray[noteNum][1];
       // txt.value = noteArray;
 
