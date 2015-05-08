@@ -18,7 +18,7 @@
 // }
 
 var noteDelete;
-var deleteClick;
+var deleteClick = false;
 var fontcolor;
 var txt = document.getElementById("txt");
 var colors = ["#ff0000", "#000000", "#FFFFFF", "#FFFF00", "#00FF00", "#6fdcff"];
@@ -26,14 +26,16 @@ var $img = $("<img class='tick' src='images/tick.png'/>");
 var $img2 = $("<img class='tick' src='images/tick.png'/>");
 var $img3 = $("<img class='tick' src='images/tick.png'/>");
 var $img4 = $("<img class='tick' src='images/tick.png'/>");
+var $img5 = $("<img class='tick' src='images/tick.png'/>");
 var tick1 = 2;
 var tick2 = 1;
 var tick3 = 1;
 var tick4 = 4;
-var noteNum = 0;
-var noteArray = [[]];
-// noteArray[0][0] = 1;
+noteNum = 0;
+noteArray = [[]];
+noteArray[0][0] = 1;
 noteArray[0][1] = "";
+var once;
 
 
 (function () {
@@ -165,10 +167,6 @@ noteArray[0][1] = "";
         $img4.appendTo(this);
         tick4 = 5;
     });
-    $("#themes ul li").click(function() {
-        $("."+tick4).remove();
-        $img4.appendTo("#t"+(tick4+1));
-    });
     // if (noteArray.)
 
     //Autosave function
@@ -179,9 +177,8 @@ noteArray[0][1] = "";
         noteArray[0][1] = "";
         init2();
       }
-      console.log(noteArray);
-      noteNum = parseInt(localStorage.getItem("noteNum"));
-      noteArray[noteNum][1] = txt.value; //noteNum undefined?s
+      console.log("stored");
+      localStorage.setItem("noteNum", noteNum);
       localStorage.setItem("fstyle", txt.style.fontFamily);
       localStorage.setItem("fsize", txt.style.fontSize);
       localStorage.setItem("theme", document.body.style.backgroundColor);
@@ -192,55 +189,64 @@ noteArray[0][1] = "";
       localStorage.setItem("tick3", tick3);
       localStorage.setItem("tick4", tick4);
 
+      noteNum = parseInt(localStorage.getItem("noteNum"));
+      noteArray[noteNum][1] = txt.value;
+
       var height = parseInt(txt.style.height) - 400;
       if (height < 400) height = 400;
       txt.style.height = height + "px";
       //txt.style.height = parseInt(txt.scrollHeight) + 'px';
     }
     function init() {
-      console.log("hi");
+      if (!Boolean(localStorage.getItem("once"))) {
+        once = true;
+        localStorage.setItem("once", once);
+        storeData();
+      }
       noteArray = JSON.parse(localStorage.getItem("notes"));
       $("#plus").click(function() {
         noteArray.push([parseInt(noteArray[noteArray.length - 1]) + 1,""]);
         $("#scroll ul").append("<li id='"+noteArray[noteArray.length - 1][0]+"'>Blank</li>");
         noteNum = noteArray[noteArray.length - 1][0] - 1;
       });
-      $("#scroll ul").on("click", "li", function() {
-        var $liID = $(this).attr("id");
-        for(var i = 0; i < noteArray.length; i++) { //indexOf does not work for multi-dimensional arrays
-          if(noteArray[i][0] == $liID) {
-            noteNum = i;
-            localStorage.setItem("noteNum", noteNum);
-            txt.value = noteArray[noteNum][1];
-          }
-        }
-      });
       $("#delete").click(function() {
         deleteClick = true;
+        $("#scroll ul li").css("color", "#FF0000");
+      });
+      $("#scroll ul").on("click", "li", function() {
+        var $liID = $(this).attr("id");
         if (deleteClick) {
+          $(this).remove();
+          $("#scroll ul li").css("color", "#000000");
+          for(var i2 = 0; i2 < noteArray.length; i2++) {
+            if(noteArray[i2][0] == $liID) {
+              noteDelete = i2;
+              break;
+            }
+          }
           deleteClick = false;
-          $("#scroll ul").on("click", "li", function() {
-            var liID = $(this).attr("id");
-            $(this).remove();
-            for(var i = 0; i < noteArray.length; i++) {
-              if(noteArray[i][0] == liID) {
-                noteDelete = i;
-                break;
-              }
+          noteArray.splice(noteDelete, 1);
+          if (noteDelete < noteNum) {
+            noteNum--;
+          } else if (noteNum == noteDelete) {
+            noteNum = 0;
+          }
+        } else {
+          for(var i = 0; i < noteArray.length; i++) { //indexOf does not work for multi-dimensional arrays
+            if(noteArray[i][0] == $liID) {
+              noteNum = i;
+              $img5.appendTo("#"+(noteNum+1));
+              localStorage.setItem("noteNum", noteNum);
+              txt.value = noteArray[noteNum][1];
             }
-            noteArray.splice(noteDelete, 1);
-            if (noteDelete < noteNum) {
-              noteNum--;
-            } else if (noteNum == noteDelete) {
-              noteNum = 0;
-            }
-          });
+          }
+          $(".lightbox").hide(400);
+          $("#overlay").hide();
         }
       });
       noteNum = parseInt(localStorage.getItem("noteNum"));
       // txt.value = parseInt(localStorage.getItem("noteNum"));
       txt.value = noteArray[noteNum][1];
-      // txt.value = noteArray;
 
       //Customisations
       var newColor = localStorage.getItem("fcolor");
@@ -261,10 +267,13 @@ noteArray[0][1] = "";
      }
     function init2() {
       for (num=0; noteArray!==null && noteArray.length > 0 && num < noteArray.length; num++) {
-         $("#scroll ul").append("<li id='"+noteArray[num][0]+"'><a>Blank</a></li>");
+         $("#scroll ul").append("<li id='"+noteArray[num][0]+"'><p>Blank</p></li>");
       }
+      tick5 = localStorage.getItem("tick5");
+      $img5.appendTo("#scroll ul li:eq("+noteNum+")");
       txt.onkeyup = storeData;
       storeData();
+
     }
     init();
     init2();

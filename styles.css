@@ -122,16 +122,17 @@ body {
 .lightbox ul {
     list-style:none;
 }
-.lightbox.custom li {
+.lightbox ul li {
     margin-left:auto;
     margin-right:auto;
     margin-top:5px;
     margin-bottom:5px;
     font-family: Open Sans;
     color:#bfbfbf;
-}
-.lightbox.custom li > p {
     font-size:14px;
+    cursor:pointer;
+}
+.lightbox ul li > p {
     padding-right:5px;
     display:inline;
     white-space:nowrap;
@@ -142,7 +143,7 @@ body {
     white-space:nowrap;
 }
 */
-.lightbox.custom li:hover {
+.lightbox li:hover {
     color:#000000;
 }
 .lightbox.custom .lb_title {
