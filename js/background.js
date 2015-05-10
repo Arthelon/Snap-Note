@@ -1,22 +1,3 @@
-// function SaveTextFile() {
-//   var savedText = document.getElementByID("txt").value;
-//   var textBlob = new Blob([savedText], {type:'text/plain; charset=UTF-8'});
-//   var downloadLink = document.createElement("a");
-//   var textFileName = "blank.txt";
-//   downloadLink.download = textFileName;
-//   downloadLink.innerHTML = "HiddenLink";
-//   downloadLink.click();
-//   window.URL = window.URL || window.webkitURL
-//   downloadLink.href = window.URL.createObjectURL(textBlob);
-//   downloadLink.onclick = destroyLink;
-//   downloadLink.style.display = "none";
-//   document.body.appendChild(downloadLink);
-//   downloadLink.click();
-// }
-// function destroyLink(event) {
-//   document.body.removeChild(event.target);
-// }
-
 var noteDelete;
 var deleteClick = false;
 var fontcolor;
@@ -167,9 +148,8 @@ var once;
         $img4.appendTo(this);
         tick4 = 5;
     });
-    // if (noteArray.)
+    //The above section is devoted to styling when the customisation list items are selected.
 
-    //Autosave function
     function storeData() {
       if (noteArray.length === 0) {
         noteArray = [[]];
@@ -177,7 +157,6 @@ var once;
         noteArray[0][1] = "";
         init2();
       }
-      console.log("stored");
       localStorage.setItem("noteNum", noteNum);
       localStorage.setItem("fstyle", txt.style.fontFamily);
       localStorage.setItem("fsize", txt.style.fontSize);
@@ -270,7 +249,7 @@ var once;
          $("#scroll ul").append("<li id='"+noteArray[num][0]+"'><p>Blank</p></li>");
       }
       tick5 = localStorage.getItem("tick5");
-      $img5.appendTo("#scroll ul li:eq("+noteNum+")");
+      $img5.appendTo("#scroll ul li:eq("+ noteNum+")");
       txt.onkeyup = storeData;
       storeData();
 
