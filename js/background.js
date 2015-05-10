@@ -1,3 +1,4 @@
+var $overlay = $("#overlay");
 var noteDelete;
 var deleteClick = false;
 var fontcolor;
@@ -16,244 +17,294 @@ noteNum = 0;
 noteArray = [[]];
 noteArray[0][0] = 1;
 noteArray[0][1] = "";
+noteArray[0][2] = "Blank";
 var once;
+var enter;
 
 
 (function () {
-    //Font-Style Customisation
-    $("#fstyle1").click(function () {
-        $("#txt").css("font-family", "Crimson Text");
-        tick1 = 0;
-    });
-    $("#fstyle2").click(function () {
-        $("#txt").css("font-family", "Open Sans");
-        tick1 = 1;
-    });
-    $("#fstyle3").click(function () {
-        $("#txt").css("font-family", "Lato");
-        tick1 = 2;
-    });
-    $("#fstyle4").click(function () {
-        $("#txt").css("font-family", "Pontano Sans");
-        tick1 = 3;
-    });
-    $("#fstyle5").click(function () {
-        $("#txt").css("font-family", "PT Sans");
-        tick1 = 4;
-    });
-    $("#fstyle6").click(function () {
-        $("#txt").css("font-family", "Arvo");
-        tick1 = 5;
-    });
-    $("#ft_style ul li").click(function() {
-        $("."+tick1).remove();
-        $img.appendTo("#fstyle"+(tick1+1));
-    });
+  //Font-Style Customisation
+  $("#fstyle1").click(function () {
+      $("#txt").css("font-family", "Crimson Text");
+      tick1 = 0;
+  });
+  $("#fstyle2").click(function () {
+      $("#txt").css("font-family", "Open Sans");
+      tick1 = 1;
+  });
+  $("#fstyle3").click(function () {
+      $("#txt").css("font-family", "Lato");
+      tick1 = 2;
+  });
+  $("#fstyle4").click(function () {
+      $("#txt").css("font-family", "Pontano Sans");
+      tick1 = 3;
+  });
+  $("#fstyle5").click(function () {
+      $("#txt").css("font-family", "PT Sans");
+      tick1 = 4;
+  });
+  $("#fstyle6").click(function () {
+      $("#txt").css("font-family", "Arvo");
+      tick1 = 5;
+  });
+  $("#ft_style ul li").click(function() {
+      $("."+tick1).remove();
+      $img.appendTo("#fstyle"+(tick1+1));
+  });
 
-    //Font-Color Customisation
-    $("#fcolor1").click(function () {
-        $("#txt").css("color", "#ff0000");
-        fontcolor = 0;
-        tick2 = 0;
-    });
-    $("#fcolor2").click(function () {
-        $("#txt").css("color", "#000000");
-        fontcolor = 1;
-        tick2 = 1;
-    });
-    $("#fcolor3").click(function () {
-        $("#txt").css("color", "#FFFFFF");
-        fontcolor = 2;
-        tick2 = 2;
-    });
-    $("#fcolor4").click(function () {
-        $("#txt").css("color", "#FFFF00");
-        fontcolor = 3;
-        tick2 = 3;
-    });
-    $("#fcolor5").click(function () {
-        $("#txt").css("color", "#00FF00");
-        fontcolor = 4;
-        tick2 = 4;
-    });
-    $("#fcolor6").click(function () {
-        $("#txt").css("color", "#6fdcff");
-        fontcolor = 5;
-        tick2 = 5;
-    });
-    $("#ft_color ul li").click(function() {
-        $("."+tick2).remove();
-        $img2.appendTo("#fcolor"+(tick2+1));
-    });
+  //Font-Color Customisation
+  $("#fcolor1").click(function () {
+      $("#txt").css("color", "#ff0000");
+      fontcolor = 0;
+      tick2 = 0;
+  });
+  $("#fcolor2").click(function () {
+      $("#txt").css("color", "#000000");
+      fontcolor = 1;
+      tick2 = 1;
+  });
+  $("#fcolor3").click(function () {
+      $("#txt").css("color", "#FFFFFF");
+      fontcolor = 2;
+      tick2 = 2;
+  });
+  $("#fcolor4").click(function () {
+      $("#txt").css("color", "#FFFF00");
+      fontcolor = 3;
+      tick2 = 3;
+  });
+  $("#fcolor5").click(function () {
+      $("#txt").css("color", "#00FF00");
+      fontcolor = 4;
+      tick2 = 4;
+  });
+  $("#fcolor6").click(function () {
+      $("#txt").css("color", "#6fdcff");
+      fontcolor = 5;
+      tick2 = 5;
+  });
+  $("#ft_color ul li").click(function() {
+      $("."+tick2).remove();
+      $img2.appendTo("#fcolor"+(tick2+1));
+  });
 
 
-    //Font-size Customisation
-    $("#fsize1").click(function () {
-        $("#txt").css("font-size", "16px");
-        tick3 = 0;
-    });
-    $("#fsize2").click(function () {
-        $("#txt").css("font-size", "14px");
-        tick3 = 1;
-    });
-    $("#fsize3").click(function () {
-        $("#txt").css("font-size", "12px");
-        tick3 = 2;
-    });
-    $("#ft_size ul li").click(function() {
-        $("."+tick3).remove();
-        $img3.appendTo("#fsize"+(tick3+1));
-    });
+  //Font-size Customisation
+  $("#fsize1").click(function () {
+      $("#txt").css("font-size", "16px");
+      tick3 = 0;
+  });
+  $("#fsize2").click(function () {
+      $("#txt").css("font-size", "14px");
+      tick3 = 1;
+  });
+  $("#fsize3").click(function () {
+      $("#txt").css("font-size", "12px");
+      tick3 = 2;
+  });
+  $("#ft_size ul li").click(function() {
+      $("."+tick3).remove();
+      $img3.appendTo("#fsize"+(tick3+1));
+  });
 
-    //Themes Customisation
-    $("#t1").click(function () {
-        $("body").css("background-color", "#EBEBEB");
-        $(".button").css("background-color", "#EBEBEB");
-        $(".4").remove();
-        $img4.appendTo(this);
-        tick4 = 0;
-    });
-    $("#t2").click(function () {
-        $("body").css("background-color", "#FFFFFF");
-        $(".button").css("background-color", "#FFFFFF");
-        $(".4").remove();
-        $img4.appendTo(this);
-        tick4 = 1;
-    });
-    $("#t3").click(function () {
-        $("body").css("background-color", "#912573");
-        $(".button").css("background-color", "#912573");
-        $(".4").remove();
-        $img4.appendTo(this);
-        tick4 = 2;
-    });
-    $("#t4").click(function () {
-        $("body").css("background-color", "#FFA500");
-        $(".button").css("background-color", "#FFFFFF");
-        $(".4").remove();
-        $img4.appendTo(this);
-        tick4 = 3;
-    });
-    $("#t5").click(function () {
-        $("body").css("background-color", "#FFF977");
-        $(".button").css("background-color", "#FFF977");
-        $(".4").remove();
-        $img4.appendTo(this);
-        tick4 = 4;
-    });
-    $("#t6").click(function () {
-        $("body").css("background-color", "#D7EAFB");
-        $(".button").css("background-color", "#D7EAFB");
-        $(".4").remove();
-        $img4.appendTo(this);
-        tick4 = 5;
-    });
-    //The above section is devoted to styling when the customisation list items are selected.
+  //Themes Customisation
+  $("#t1").click(function () {
+      $("body").css("background-color", "#EBEBEB");
+      $(".button").css("background-color", "#EBEBEB");
+      $(".4").remove();
+      $img4.appendTo(this);
+      tick4 = 0;
+  });
+  $("#t2").click(function () {
+      $("body").css("background-color", "#FFFFFF");
+      $(".button").css("background-color", "#FFFFFF");
+      $(".4").remove();
+      $img4.appendTo(this);
+      tick4 = 1;
+  });
+  $("#t3").click(function () {
+      $("body").css("background-color", "#912573");
+      $(".button").css("background-color", "#912573");
+      $(".4").remove();
+      $img4.appendTo(this);
+      tick4 = 2;
+  });
+  $("#t4").click(function () {
+      $("body").css("background-color", "#FFA500");
+      $(".button").css("background-color", "#FFFFFF");
+      $(".4").remove();
+      $img4.appendTo(this);
+      tick4 = 3;
+  });
+  $("#t5").click(function () {
+      $("body").css("background-color", "#FFF977");
+      $(".button").css("background-color", "#FFF977");
+      $(".4").remove();
+      $img4.appendTo(this);
+      tick4 = 4;
+  });
+  $("#t6").click(function () {
+      $("body").css("background-color", "#D7EAFB");
+      $(".button").css("background-color", "#D7EAFB");
+      $(".4").remove();
+      $img4.appendTo(this);
+      tick4 = 5;
+  });
+  //The above section is devoted to styling when the customisation list items are selected.
 
-    function storeData() {
-      if (noteArray.length === 0) {
-        noteArray = [[]];
-        noteArray[0][0] = 1;
-        noteArray[0][1] = "";
-        init2();
-      }
-      localStorage.setItem("noteNum", noteNum);
-      localStorage.setItem("fstyle", txt.style.fontFamily);
-      localStorage.setItem("fsize", txt.style.fontSize);
-      localStorage.setItem("theme", document.body.style.backgroundColor);
-      localStorage.setItem("fcolor", colors[fontcolor]);
-      localStorage.setItem("notes", JSON.stringify(noteArray));
-      localStorage.setItem("tick1", tick1);
-      localStorage.setItem("tick2", tick2);
-      localStorage.setItem("tick3", tick3);
-      localStorage.setItem("tick4", tick4);
+  $overlay.click(function () {
+      $(".lightbox").hide(400);
+      $(this).hide();
+      storeData(); //Data saves when the overlay is selected
+  });
 
-      noteNum = parseInt(localStorage.getItem("noteNum"));
-      noteArray[noteNum][1] = txt.value;
-
-      var height = parseInt(txt.style.height) - 400;
-      if (height < 400) height = 400;
-      txt.style.height = height + "px";
-      //txt.style.height = parseInt(txt.scrollHeight) + 'px';
+  function storeData() {
+    if (noteArray.length === 0) {
+      noteArray = [[]];
+      noteArray[0][0] = 1;
+      noteArray[0][1] = "";
+      noteArray[0][2] = "Blank";
+      init2();
     }
-    function init() {
-      if (!Boolean(localStorage.getItem("once"))) {
-        once = true;
-        localStorage.setItem("once", once);
-        storeData();
+    if (noteArray[noteNum][2] === "") {
+      noteArray[noteNum][2] = "Blank";
+      $("#scroll ul li:eq("+noteNum+")").children("p").html(noteArray[noteNum][2]);
+    }
+    localStorage.setItem("noteNum", noteNum);
+    localStorage.setItem("fstyle", txt.style.fontFamily);
+    localStorage.setItem("fsize", txt.style.fontSize);
+    localStorage.setItem("theme", document.body.style.backgroundColor);
+    localStorage.setItem("fcolor", colors[fontcolor]);
+    localStorage.setItem("tick1", tick1);
+    localStorage.setItem("tick2", tick2);
+    localStorage.setItem("tick3", tick3);
+    localStorage.setItem("tick4", tick4);
+
+    noteNum = parseInt(localStorage.getItem("noteNum"));
+    noteArray[noteNum][1] = txt.value;
+    noteArray[noteNum][2] = $("#scroll ul li:eq("+ noteNum +")").children("p").html();
+    localStorage.setItem("notes", JSON.stringify(noteArray));
+
+    var height = parseInt(txt.style.height) - 400;
+    if (height < 400) height = 400;
+    txt.style.height = height + "px";
+    //txt.style.height = parseInt(txt.scrollHeight) + 'px';
+  }
+  function init() {
+    if (!Boolean(localStorage.getItem("once"))) {
+      once = true;
+      localStorage.setItem("once", once);
+      storeData();
+    }
+    noteArray = JSON.parse(localStorage.getItem("notes"));
+    $(document).keypress(function(event){
+      if (event.which == 13) {
+        enter = true;
       }
-      noteArray = JSON.parse(localStorage.getItem("notes"));
-      $("#plus").click(function() {
-        noteArray.push([parseInt(noteArray[noteArray.length - 1]) + 1,""]);
-        $("#scroll ul").append("<li id='"+noteArray[noteArray.length - 1][0]+"'>Blank</li>");
-        noteNum = noteArray[noteArray.length - 1][0] - 1;
-      });
-      $("#delete").click(function() {
-        deleteClick = true;
-        $("#scroll ul li").css("color", "#FF0000");
-      });
-      $("#scroll ul").on("click", "li", function() {
-        var $liID = $(this).attr("id");
-        if (deleteClick) {
-          $(this).remove();
-          $("#scroll ul li").css("color", "#000000");
-          for(var i2 = 0; i2 < noteArray.length; i2++) {
-            if(noteArray[i2][0] == $liID) {
-              noteDelete = i2;
-              break;
-            }
+    });
+    $("#plus").click(function() {
+      noteArray.push([parseInt(noteArray[noteArray.length - 1]) + 1,"","Blank"]);
+      noteNum = noteArray[noteArray.length - 1][0] - 1;
+      $("#scroll ul").append("<li id='"+noteArray[noteArray.length - 1][0]+"'><p>"+noteArray[noteNum][2]+"</p></li>");
+    });
+    $("#delete").click(function() {
+      deleteClick = true;
+      $("#scroll ul li").css("color", "#FF0000");
+    });
+    $("#scroll ul").on("click", "li", function() {
+      $("#scroll ul li p").attr("contenteditable","false");
+      var $liID = $(this).attr("id");
+      if (deleteClick) {
+        $(this).remove();
+        $("#scroll ul li").css("color", "#000000");
+        for(var i2 = 0; i2 < noteArray.length; i2++) {
+          if(noteArray[i2][0] == $liID) {
+            noteDelete = i2;
+            break;
           }
-          deleteClick = false;
-          noteArray.splice(noteDelete, 1);
-          if (noteDelete < noteNum) {
-            noteNum--;
-          } else if (noteNum == noteDelete) {
-            noteNum = 0;
+        }
+        deleteClick = false;
+        noteArray.splice(noteDelete, 1);
+        if (noteDelete < noteNum) {
+          noteNum--;
+        } else if (noteNum == noteDelete) {
+          noteNum = 0;
+        }
+      } else {
+        for(var i = 0; i < noteArray.length; i++) { //indexOf does not work for multi-dimensional arrays
+          if(noteArray[i][0] == $liID) {
+            noteNum = i;
+            $img5.appendTo("#scroll ul li:eq("+noteNum+")");
+            localStorage.setItem("noteNum", noteNum);
+            txt.value = noteArray[noteNum][1];
           }
-        } else {
-          for(var i = 0; i < noteArray.length; i++) { //indexOf does not work for multi-dimensional arrays
-            if(noteArray[i][0] == $liID) {
-              noteNum = i;
-              $img5.appendTo("#"+(noteNum+1));
-              localStorage.setItem("noteNum", noteNum);
-              txt.value = noteArray[noteNum][1];
-            }
-          }
+        }
+        if (!enter) {
           $(".lightbox").hide(400);
           $("#overlay").hide();
+          storeData();
         }
-      });
-      noteNum = parseInt(localStorage.getItem("noteNum"));
-      // txt.value = parseInt(localStorage.getItem("noteNum"));
-      txt.value = noteArray[noteNum][1];
-
-      //Customisations
-      var newColor = localStorage.getItem("fcolor");
-      txt.style.fontFamily = localStorage.getItem("fstyle");
-      txt.style.fontSize = localStorage.getItem("fsize");
-      $("#txt").css("color", newColor);
-      document.body.style.backgroundColor = localStorage.getItem("theme");
-
-      tick1 = localStorage.getItem("tick1");
-      tick2 = localStorage.getItem("tick2");
-      tick3 = localStorage.getItem("tick3");
-      tick4 = localStorage.getItem("tick4");
-
-      $img.appendTo("#ft_style ul li:eq("+ tick1 +")"); //nth-child method deprecated
-      $img2.appendTo("#ft_color ul li:eq("+ tick2 +")");
-      $img3.appendTo("#ft_size ul li:eq("+ tick3 +")");
-      $img4.appendTo("#themes ul li:eq("+ tick4 +")");
-     }
-    function init2() {
-      for (num=0; noteArray!==null && noteArray.length > 0 && num < noteArray.length; num++) {
-         $("#scroll ul").append("<li id='"+noteArray[num][0]+"'><p>Blank</p></li>");
+        if (enter) {
+          enter = false;
+          $(this).children("p").attr("contenteditable","true");
+          $(document).keypress(function(event){
+            if (event.which == 13) {
+              return false;
+            }
+          });
+          storeData();
+        }
       }
-      tick5 = localStorage.getItem("tick5");
-      $img5.appendTo("#scroll ul li:eq("+ noteNum+")");
-      txt.onkeyup = storeData;
-      storeData();
+    });
+    noteNum = parseInt(localStorage.getItem("noteNum"));
+    txt.value = noteArray[noteNum][1];
 
+    //Customisations
+    var newColor = localStorage.getItem("fcolor");
+    txt.style.fontFamily = localStorage.getItem("fstyle");
+    txt.style.fontSize = localStorage.getItem("fsize");
+    $("#txt").css("color", newColor);
+    document.body.style.backgroundColor = localStorage.getItem("theme");
+
+    tick1 = localStorage.getItem("tick1");
+    tick2 = localStorage.getItem("tick2");
+    tick3 = localStorage.getItem("tick3");
+    tick4 = localStorage.getItem("tick4");
+
+    $img.appendTo("#ft_style ul li:eq("+ tick1 +")"); //nth-child method deprecated
+    $img2.appendTo("#ft_color ul li:eq("+ tick2 +")");
+    $img3.appendTo("#ft_size ul li:eq("+ tick3 +")");
+    $img4.appendTo("#themes ul li:eq("+ tick4 +")");
+   }
+  function init2() {
+    for (num=0; noteArray!==null && noteArray.length > 0 && num < noteArray.length; num++) {
+       $("#scroll ul").append("<li id='"+noteArray[num][0]+"'><p></p></li>");
+       $("#scroll ul li:eq("+num+")").children("p").html(noteArray[num][2]);
     }
-    init();
-    init2();
+    tick5 = localStorage.getItem("tick5");
+    $img5.appendTo("#scroll ul li:eq("+ noteNum +")");
+    txt.onkeyup = storeData;
+    storeData();
+  }
+  //Large part of the next bit was taken from runnable.com
+  $("#download").click(function () {
+    var savedText = document.getElementById("txt").value;
+    var textBlob = new Blob([savedText], {type:'text/plain; charset=UTF-8'});
+    var downloadLink = document.createElement("a");
+    downloadLink.download = noteArray[noteNum][2];
+    downloadLink.innerHTML = "HiddenLink";
+    downloadLink.click();
+    window.URL = window.URL || window.webkitURL;
+    downloadLink.href = window.URL.createObjectURL(textBlob);
+    downloadLink.onclick = destroyLink;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+  });
+  function destroyLink(event) {
+    document.body.removeChild(event.target);
+  }
+  init();
+  init2();
 }());

@@ -1,7 +1,6 @@
 /*jslint undef: true, sloppy: true, browser: true */
-
-var dropclick = false;
 var $overlay = $("#overlay");
+var dropclick = false;
 $(function () {
     //"Settings" button drop-down
     $(".dropdown").click(function () {
@@ -36,28 +35,4 @@ $(function () {
         $("#notes").show(500);
         $overlay.show();
     });
-    $overlay.click(function () {
-        $(".lightbox").hide(400);
-        $(this).hide();
-    });
-
-    //Large part of the next bit was taken from runnable.com
-    $("#download").click(function () {
-      var savedText = document.getElementById("txt").value;
-      var textBlob = new Blob([savedText], {type:'text/plain; charset=UTF-8'});
-      var downloadLink = document.createElement("a");
-      var textFileName = "blank.txt";
-      downloadLink.download = textFileName;
-      downloadLink.innerHTML = "HiddenLink";
-      downloadLink.click();
-      window.URL = window.URL || window.webkitURL;
-      downloadLink.href = window.URL.createObjectURL(textBlob);
-      downloadLink.onclick = destroyLink;
-      downloadLink.style.display = "none";
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-    });
-    function destroyLink(event) {
-      document.body.removeChild(event.target);
-    }
 });
