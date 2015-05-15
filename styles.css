@@ -61,7 +61,7 @@ body {
 
 /** Scrollbar **/
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 ::-webkit-scrollbar-track {
 /*
@@ -198,4 +198,7 @@ body {
   overflow:scroll;
   background-color:#ffffff;
   top:0px;
+}
+#notes {
+  display:none;
 }

@@ -20,6 +20,7 @@ noteArray[0][1] = "";
 noteArray[0][2] = "Blank";
 var once;
 var enter;
+var check = $("#notes").css("display");
 
 
 (function () {
@@ -152,24 +153,27 @@ var enter;
       tick4 = 5;
   });
   //The above section is devoted to styling when the customisation list items are selected.
-
   $overlay.click(function () {
-      $(".lightbox").hide(400);
-      $(this).hide();
-      storeData(); //Data saves when the overlay is selected
+    $(".lightbox").hide(400);
+    $(this).hide();
+    storeData(); //Data saves when the overlay is selected
   });
 
   function storeData() {
+    console.log(noteNum);
+    console.log(noteArray);
+    for(var i = 0; i < noteArray.length; i++) { //indexOf does not work for multi-dimensional arrays
+      if(noteArray[i][2] === "") {
+        noteArray[i][2] = "Blank";
+        storeData();
+      }
+    }
     if (noteArray.length === 0) {
       noteArray = [[]];
       noteArray[0][0] = 1;
       noteArray[0][1] = "";
       noteArray[0][2] = "Blank";
       init2();
-    }
-    if (noteArray[noteNum][2] === "") {
-      noteArray[noteNum][2] = "Blank";
-      $("#scroll ul li:eq("+noteNum+")").children("p").html(noteArray[noteNum][2]);
     }
     localStorage.setItem("noteNum", noteNum);
     localStorage.setItem("fstyle", txt.style.fontFamily);
@@ -180,6 +184,7 @@ var enter;
     localStorage.setItem("tick2", tick2);
     localStorage.setItem("tick3", tick3);
     localStorage.setItem("tick4", tick4);
+
 
     noteNum = parseInt(localStorage.getItem("noteNum"));
     noteArray[noteNum][1] = txt.value;
@@ -198,14 +203,13 @@ var enter;
       storeData();
     }
     noteArray = JSON.parse(localStorage.getItem("notes"));
-    $(document).keypress(function(event){
+    $(document).keypress(function(event) {
       if (event.which == 13) {
         enter = true;
       }
     });
     $("#plus").click(function() {
       noteArray.push([parseInt(noteArray[noteArray.length - 1]) + 1,"","Blank"]);
-      noteNum = noteArray[noteArray.length - 1][0] - 1;
       $("#scroll ul").append("<li id='"+noteArray[noteArray.length - 1][0]+"'><p>"+noteArray[noteNum][2]+"</p></li>");
     });
     $("#delete").click(function() {
@@ -213,24 +217,26 @@ var enter;
       $("#scroll ul li").css("color", "#FF0000");
     });
     $("#scroll ul").on("click", "li", function() {
-      $("#scroll ul li p").attr("contenteditable","false");
       var $liID = $(this).attr("id");
       if (deleteClick) {
+        deleteClick = false;
         $(this).remove();
-        $("#scroll ul li").css("color", "#000000");
+        $("#scroll ul li").css("color", "#bfbfbf");
         for(var i2 = 0; i2 < noteArray.length; i2++) {
           if(noteArray[i2][0] == $liID) {
             noteDelete = i2;
             break;
           }
         }
-        deleteClick = false;
         noteArray.splice(noteDelete, 1);
         if (noteDelete < noteNum) {
           noteNum--;
+          console.log(noteNum);
         } else if (noteNum == noteDelete) {
           noteNum = 0;
+          txt.value = noteArray[noteNum][1];
         }
+        storeData();
       } else {
         for(var i = 0; i < noteArray.length; i++) { //indexOf does not work for multi-dimensional arrays
           if(noteArray[i][0] == $liID) {
@@ -248,11 +254,6 @@ var enter;
         if (enter) {
           enter = false;
           $(this).children("p").attr("contenteditable","true");
-          $(document).keypress(function(event){
-            if (event.which == 13) {
-              return false;
-            }
-          });
           storeData();
         }
       }
@@ -278,9 +279,10 @@ var enter;
     $img4.appendTo("#themes ul li:eq("+ tick4 +")");
    }
   function init2() {
+    console.log(noteArray);
     for (num=0; noteArray!==null && noteArray.length > 0 && num < noteArray.length; num++) {
        $("#scroll ul").append("<li id='"+noteArray[num][0]+"'><p></p></li>");
-       $("#scroll ul li:eq("+num+")").children("p").html(noteArray[num][2]);
+       $("#scroll ul li:eq("+ num +")").children("p").html(noteArray[num][2]);
     }
     tick5 = localStorage.getItem("tick5");
     $img5.appendTo("#scroll ul li:eq("+ noteNum +")");
