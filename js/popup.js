@@ -4,6 +4,7 @@ var dropclick = false;
 $(function () {
     //"Settings" button drop-down
     $(".dropdown").click(function () {
+        //Boolean used to create a button toggle. 
         if (dropclick) {
             dropclick = false;
             $(".dropdown-menu").hide(300);
@@ -15,7 +16,7 @@ $(function () {
 
     //Overlay & Lightbox show/hide
     $overlay.hide();
-    $("#dd_style").click(function () {
+    $("#dd_style").click(function () { //.click() event handler attached to "Customisation" options. When they are clicked their allocated lightbox appears
         $("#ft_style").show(500);
         $overlay.show();
     });

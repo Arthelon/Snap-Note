@@ -1,26 +1,38 @@
 var $overlay = $("#overlay");
-var noteDelete;
-var deleteClick = false;
-var fontcolor;
+var deleteClick = false; //Used icons "delete" button toggle
+
 var txt = document.getElementById("txt");
+//Array storing all different font colors
 var colors = ["#ff0000", "#000000", "#FFFFFF", "#FFFF00", "#00FF00", "#6fdcff"];
+
+// Tick images
 var $img = $("<img class='tick' src='images/tick.png'/>");
 var $img2 = $("<img class='tick' src='images/tick.png'/>");
 var $img3 = $("<img class='tick' src='images/tick.png'/>");
 var $img4 = $("<img class='tick' src='images/tick.png'/>");
 var $img5 = $("<img class='tick' src='images/tick.png'/>");
+
+//Used to specify default index of the ticks in the "Customisations" lightboxes
 var tick1 = 2;
 var tick2 = 1;
 var tick3 = 1;
 var tick4 = 4;
-noteNum = 0;
+noteNum = 0; //Default notepad index in noteArray
+
+//Array in which the notepads are stored in
 noteArray = [[]];
+
+//Notepad ID
 noteArray[0][0] = 1;
+//Notepad content
 noteArray[0][1] = "";
+//Notepad name
 noteArray[0][2] = "Blank";
+
+var noteDelete;
+var fontcolor;
 var once;
 var enter;
-var check = $("#notes").css("display");
 
 
 (function () {
@@ -50,6 +62,7 @@ var check = $("#notes").css("display");
       tick1 = 5;
   });
   $("#ft_style ul li").click(function() {
+    //The existing tick image is removed. New tick image is added beside the option that is selcected
       $("."+tick1).remove();
       $img.appendTo("#fstyle"+(tick1+1));
   });
@@ -86,6 +99,7 @@ var check = $("#notes").css("display");
       tick2 = 5;
   });
   $("#ft_color ul li").click(function() {
+    //The existing tick image is removed. New tick image is added beside the option that is selcected
       $("."+tick2).remove();
       $img2.appendTo("#fcolor"+(tick2+1));
   });
@@ -105,6 +119,7 @@ var check = $("#notes").css("display");
       tick3 = 2;
   });
   $("#ft_size ul li").click(function() {
+    //The existing tick image is removed. New tick image is added beside the option that is selcected
       $("."+tick3).remove();
       $img3.appendTo("#fsize"+(tick3+1));
   });
@@ -114,8 +129,8 @@ var check = $("#notes").css("display");
       $("body").css("background-color", "#EBEBEB");
       $(".button").css("background-color", "#EBEBEB");
       $(".4").remove();
-      $img4.appendTo(this);
-      tick4 = 0;
+      $img4.appendTo(this); //Tick is added beside this option when selected
+      tick4 = 0;  //Index of the tick image
   });
   $("#t2").click(function () {
       $("body").css("background-color", "#FFFFFF");
@@ -160,25 +175,30 @@ var check = $("#notes").css("display");
   });
 
   function storeData() {
-    console.log(noteNum);
-    console.log(noteArray);
-    for(var i = 0; i < noteArray.length; i++) { //indexOf does not work for multi-dimensional arrays
-      if(noteArray[i][2] === "") {
+    //indexOf does not work for multi-dimensional arrays, had to use a for loop instead
+    for(var i = 0; i < noteArray.length; i++) {
+      if(noteArray[i][2] === "") { //if Notepad name is empty, it is set to "Blank"
         noteArray[i][2] = "Blank";
         storeData();
       }
     }
-    if (noteArray.length === 0) {
+    if (noteArray.length === 0) { //if all the Notepads are deleted, a blank one is created
       noteArray = [[]];
       noteArray[0][0] = 1;
       noteArray[0][1] = "";
       noteArray[0][2] = "Blank";
       init2();
     }
+
+    //Stores various pieces of data into localStorage for later use
     localStorage.setItem("noteNum", noteNum);
+
+    //The following 3 lines of code make use of the style DOM object.
     localStorage.setItem("fstyle", txt.style.fontFamily);
     localStorage.setItem("fsize", txt.style.fontSize);
     localStorage.setItem("theme", document.body.style.backgroundColor);
+
+    //Since there is no style fontColor object, I am using an array in its stead.
     localStorage.setItem("fcolor", colors[fontcolor]);
     localStorage.setItem("tick1", tick1);
     localStorage.setItem("tick2", tick2);
@@ -187,52 +207,60 @@ var check = $("#notes").css("display");
 
 
     noteNum = parseInt(localStorage.getItem("noteNum"));
+    //The textarea content is saved into noteArray as the content of the current Notepad
     noteArray[noteNum][1] = txt.value;
+    //Notepad name is saved into noteArray
     noteArray[noteNum][2] = $("#scroll ul li:eq("+ noteNum +")").children("p").html();
+    //noteArray is saved in localStorage
     localStorage.setItem("notes", JSON.stringify(noteArray));
 
     var height = parseInt(txt.style.height) - 400;
     if (height < 400) height = 400;
     txt.style.height = height + "px";
-    //txt.style.height = parseInt(txt.scrollHeight) + 'px';
   }
   function init() {
+    //The following statement is set to run only once, when the extension is first opened.
     if (!Boolean(localStorage.getItem("once"))) {
       once = true;
       localStorage.setItem("once", once);
       storeData();
     }
+    //localStorage only returns String so noteArray has to be converted into JSON format before being reverted back to an array.
     noteArray = JSON.parse(localStorage.getItem("notes"));
     $(document).keypress(function(event) {
       if (event.which == 13) {
         enter = true;
       }
     });
+    //"Plus" button functionality
     $("#plus").click(function() {
+      //Pushes blank notepad details into the last row of the array.
       noteArray.push([parseInt(noteArray[noteArray.length - 1]) + 1,"","Blank"]);
+      //Adds new notepad item into "Organisation" lightbox
       $("#scroll ul").append("<li id='"+noteArray[noteArray.length - 1][0]+"'><p>"+noteArray[noteNum][2]+"</p></li>");
     });
-    $("#delete").click(function() {
+    $("#delete").click(function() { //When "delete" button is clicked
       deleteClick = true;
+      //Notepad items turn red to indicate that the "delete" function is active
       $("#scroll ul li").css("color", "#FF0000");
     });
-    $("#scroll ul").on("click", "li", function() {
-      var $liID = $(this).attr("id");
-      if (deleteClick) {
+    $("#scroll ul").on("click", "li", function() { //Click event handler is attached to Notepad item
+      var $liID = $(this).attr("id"); //each Notepad's ID is stored in the first column of noteArray
+      if (deleteClick) { //If delete function is enabled
         deleteClick = false;
-        $(this).remove();
-        $("#scroll ul li").css("color", "#bfbfbf");
+        $(this).remove(); //Notepad item removed from DOM
+        $("#scroll ul li").css("color", "#bfbfbf"); //Notepad names are reverted back to their original color
+        //indexOf() does not work for multi-dimensional array.
         for(var i2 = 0; i2 < noteArray.length; i2++) {
           if(noteArray[i2][0] == $liID) {
-            noteDelete = i2;
+            noteDelete = i2; //noteDelete is equal to the noteArray index of the selected Notepad
             break;
           }
         }
-        noteArray.splice(noteDelete, 1);
-        if (noteDelete < noteNum) {
+        noteArray.splice(noteDelete, 1); //The row of the selected notepad is removed from noteArray
+        if (noteDelete < noteNum) { //If the deleted notepad is situated before the one that is in use (in terms of array index)
           noteNum--;
-          console.log(noteNum);
-        } else if (noteNum == noteDelete) {
+        } else if (noteNum == noteDelete) { //If the deleted notepad is the one that is in use
           noteNum = 0;
           txt.value = noteArray[noteNum][1];
         }
@@ -240,24 +268,26 @@ var check = $("#notes").css("display");
       } else {
         for(var i = 0; i < noteArray.length; i++) { //indexOf does not work for multi-dimensional arrays
           if(noteArray[i][0] == $liID) {
-            noteNum = i;
-            $img5.appendTo("#scroll ul li:eq("+noteNum+")");
+            noteNum = i; //noteNum is equal to the index of the array that is in use
+            $img5.appendTo("#scroll ul li:eq("+noteNum+")"); //Tick image is added beside the selectd notepad
             localStorage.setItem("noteNum", noteNum);
-            txt.value = noteArray[noteNum][1];
+            txt.value = noteArray[noteNum][1]; //value of textarea is set to the content of the current notepad
           }
         }
-        if (!enter) {
+        if (!enter) { //If enter button was not clicked
           $(".lightbox").hide(400);
           $("#overlay").hide();
           storeData();
         }
-        if (enter) {
+        if (enter) { //If enter button was clicked
           enter = false;
           $(this).children("p").attr("contenteditable","true");
           storeData();
         }
       }
     });
+
+    //Main initiation block
     noteNum = parseInt(localStorage.getItem("noteNum"));
     txt.value = noteArray[noteNum][1];
 
@@ -277,9 +307,7 @@ var check = $("#notes").css("display");
     $img2.appendTo("#ft_color ul li:eq("+ tick2 +")");
     $img3.appendTo("#ft_size ul li:eq("+ tick3 +")");
     $img4.appendTo("#themes ul li:eq("+ tick4 +")");
-   }
-  function init2() {
-    console.log(noteArray);
+    //Adds all notepad items into the "Organisation" lightbox when the extension is first opened
     for (num=0; noteArray!==null && noteArray.length > 0 && num < noteArray.length; num++) {
        $("#scroll ul").append("<li id='"+noteArray[num][0]+"'><p></p></li>");
        $("#scroll ul li:eq("+ num +")").children("p").html(noteArray[num][2]);
@@ -289,7 +317,9 @@ var check = $("#notes").css("display");
     txt.onkeyup = storeData;
     storeData();
   }
-  //Large part of the next bit was taken from runnable.com
+
+  //Most of the code content below was taken from other sources
+  //"Download" button functionality
   $("#download").click(function () {
     var savedText = document.getElementById("txt").value;
     var textBlob = new Blob([savedText], {type:'text/plain; charset=UTF-8'});
@@ -308,5 +338,4 @@ var check = $("#notes").css("display");
     document.body.removeChild(event.target);
   }
   init();
-  init2();
 }());
