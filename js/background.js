@@ -175,10 +175,12 @@ var enter;
   });
 
   function storeData() {
+    console.log(noteArray);
     //indexOf does not work for multi-dimensional arrays, had to use a for loop instead
     for(var i = 0; i < noteArray.length; i++) {
       if(noteArray[i][2] === "") { //if Notepad name is empty, it is set to "Blank"
         noteArray[i][2] = "Blank";
+        $("#scroll ul li").children("p").html(noteArray[i][2]);
         storeData();
       }
     }
@@ -187,7 +189,10 @@ var enter;
       noteArray[0][0] = 1;
       noteArray[0][1] = "";
       noteArray[0][2] = "Blank";
+      txt.value = "";
+      localStorage.setItem("notes", JSON.stringify(noteArray));
       init2();
+      $("#scroll ul li").children("p").html(noteArray[0][2]);
     }
 
     //Stores various pieces of data into localStorage for later use
@@ -209,6 +214,7 @@ var enter;
     noteNum = parseInt(localStorage.getItem("noteNum"));
     //The textarea content is saved into noteArray as the content of the current Notepad
     noteArray[noteNum][1] = txt.value;
+    console.log(noteArray[noteNum][1]);
     //Notepad name is saved into noteArray
     noteArray[noteNum][2] = $("#scroll ul li:eq("+ noteNum +")").children("p").html();
     //noteArray is saved in localStorage
@@ -225,19 +231,20 @@ var enter;
       localStorage.setItem("once", once);
       storeData();
     }
-    //localStorage only returns String so noteArray has to be converted into JSON format before being reverted back to an array.
-    noteArray = JSON.parse(localStorage.getItem("notes"));
-    $(document).keypress(function(event) {
-      if (event.which == 13) {
-        enter = true;
+    $('html').bind('keypress', function(e) {
+      if(e.keyCode == 13) {
+        enter = true; //Allows the renaming function to occur
       }
     });
+    //localStorage only returns String so noteArray has to be converted into JSON format before being reverted back to an array.
+    noteArray = JSON.parse(localStorage.getItem("notes"));
     //"Plus" button functionality
     $("#plus").click(function() {
       //Pushes blank notepad details into the last row of the array.
       noteArray.push([parseInt(noteArray[noteArray.length - 1]) + 1,"","Blank"]);
+      console.log(noteArray);
       //Adds new notepad item into "Organisation" lightbox
-      $("#scroll ul").append("<li id='"+noteArray[noteArray.length - 1][0]+"'><p>"+noteArray[noteNum][2]+"</p></li>");
+      $("#scroll ul").append("<li id='"+noteArray[noteArray.length - 1][0]+"'><p>"+noteArray[noteArray.length - 1][2]+"</p></li>");
     });
     $("#delete").click(function() { //When "delete" button is clicked
       deleteClick = true;
@@ -259,10 +266,15 @@ var enter;
         }
         noteArray.splice(noteDelete, 1); //The row of the selected notepad is removed from noteArray
         if (noteDelete < noteNum) { //If the deleted notepad is situated before the one that is in use (in terms of array index)
+          for (i = 0; i < noteArray.length; i++) {
+            if (noteArray[i][0]-1 > noteDelete) {
+              noteArray[i][0] -= 1;
+            }
+          }
           noteNum--;
-        } else if (noteNum == noteDelete) { //If the deleted notepad is the one that is in use
+        } else if (noteNum == noteDelete && noteArray.length !== 0) { //If the deleted notepad is the one that is in use
           noteNum = 0;
-          txt.value = noteArray[noteNum][1];
+          txt.value = noteArray[0][1];
         }
         storeData();
       } else {
@@ -274,14 +286,14 @@ var enter;
             txt.value = noteArray[noteNum][1]; //value of textarea is set to the content of the current notepad
           }
         }
-        if (!enter) { //If enter button was not clicked
+        if (!enter && !deleteClick) { //If delete and enter button were not clicked
           $(".lightbox").hide(400);
           $("#overlay").hide();
           storeData();
         }
         if (enter) { //If enter button was clicked
-          enter = false;
           $(this).children("p").attr("contenteditable","true");
+          enter = false;
           storeData();
         }
       }
@@ -308,6 +320,8 @@ var enter;
     $img3.appendTo("#ft_size ul li:eq("+ tick3 +")");
     $img4.appendTo("#themes ul li:eq("+ tick4 +")");
     //Adds all notepad items into the "Organisation" lightbox when the extension is first opened
+  }
+  function init2() {
     for (num=0; noteArray!==null && noteArray.length > 0 && num < noteArray.length; num++) {
        $("#scroll ul").append("<li id='"+noteArray[num][0]+"'><p></p></li>");
        $("#scroll ul li:eq("+ num +")").children("p").html(noteArray[num][2]);
@@ -338,4 +352,5 @@ var enter;
     document.body.removeChild(event.target);
   }
   init();
+  init2();
 }());
