@@ -210,7 +210,7 @@ var enter;
     localStorage.setItem("tick3", tick3);
     localStorage.setItem("tick4", tick4);
 
-
+    $img5.appendTo("#scroll ul li:eq("+noteNum+")");
     noteNum = parseInt(localStorage.getItem("noteNum"));
     //The textarea content is saved into noteArray as the content of the current Notepad
     noteArray[noteNum][1] = txt.value;
@@ -242,7 +242,6 @@ var enter;
     $("#plus").click(function() {
       //Pushes blank notepad details into the last row of the array.
       noteArray.push([parseInt(noteArray[noteArray.length - 1]) + 1,"","Blank"]);
-      console.log(noteArray);
       //Adds new notepad item into "Organisation" lightbox
       $("#scroll ul").append("<li id='"+noteArray[noteArray.length - 1][0]+"'><p>"+noteArray[noteArray.length - 1][2]+"</p></li>");
     });
@@ -266,15 +265,11 @@ var enter;
         }
         noteArray.splice(noteDelete, 1); //The row of the selected notepad is removed from noteArray
         if (noteDelete < noteNum) { //If the deleted notepad is situated before the one that is in use (in terms of array index)
-          for (i = 0; i < noteArray.length; i++) {
-            if (noteArray[i][0]-1 > noteDelete) {
-              noteArray[i][0] -= 1;
-            }
-          }
           noteNum--;
         } else if (noteNum == noteDelete && noteArray.length !== 0) { //If the deleted notepad is the one that is in use
           noteNum = 0;
           txt.value = noteArray[0][1];
+          $img5.appendTo("#scroll ul li:eq("+noteNum+")");
         }
         storeData();
       } else {

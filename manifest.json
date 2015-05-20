@@ -2,7 +2,8 @@
     "name": "Notepad V1.",
     "version": "0.0.1",
     "manifest_version": 2,
-    "description": "",
+    "description": "A Chrome Extension in the form of a pop-up notepad with various functions",
+    "author": "Daniel Hsing",
     "offline_enabled": true,
     "background": {
      "scripts": [
