@@ -20,7 +20,9 @@ var tick4 = 4;
 noteNum = 0; //Default notepad index in noteArray
 
 //Array in which the notepads are stored in
-noteArray = [[]];
+noteArray = [
+  []
+];
 
 //Notepad ID
 noteArray[0][0] = 1;
@@ -35,157 +37,158 @@ var once;
 var enter;
 
 
-(function () {
+(function() {
   //Font-Style Customisation
-  $("#fstyle1").click(function () {
-      $("#txt").css("font-family", "Crimson Text");
-      tick1 = 0;
+  $("#fstyle1").click(function() {
+    $("#txt").css("font-family", "Crimson Text");
+    tick1 = 0;
   });
-  $("#fstyle2").click(function () {
-      $("#txt").css("font-family", "Open Sans");
-      tick1 = 1;
+  $("#fstyle2").click(function() {
+    $("#txt").css("font-family", "Open Sans");
+    tick1 = 1;
   });
-  $("#fstyle3").click(function () {
-      $("#txt").css("font-family", "Lato");
-      tick1 = 2;
+  $("#fstyle3").click(function() {
+    $("#txt").css("font-family", "Lato");
+    tick1 = 2;
   });
-  $("#fstyle4").click(function () {
-      $("#txt").css("font-family", "Pontano Sans");
-      tick1 = 3;
+  $("#fstyle4").click(function() {
+    $("#txt").css("font-family", "Pontano Sans");
+    tick1 = 3;
   });
-  $("#fstyle5").click(function () {
-      $("#txt").css("font-family", "PT Sans");
-      tick1 = 4;
+  $("#fstyle5").click(function() {
+    $("#txt").css("font-family", "PT Sans");
+    tick1 = 4;
   });
-  $("#fstyle6").click(function () {
-      $("#txt").css("font-family", "Arvo");
-      tick1 = 5;
+  $("#fstyle6").click(function() {
+    $("#txt").css("font-family", "Arvo");
+    tick1 = 5;
   });
   $("#ft_style ul li").click(function() {
-    //The existing tick image is removed. New tick image is added beside the option that is selcected
-      $("."+tick1).remove();
-      $img.appendTo("#fstyle"+(tick1+1));
+    //The existing tick image is removed. New tick image is added beside the option that is selected
+    $("." + tick1).remove();
+    $img.appendTo("#fstyle" + (tick1 + 1));
   });
 
   //Font-Color Customisation
-  $("#fcolor1").click(function () {
-      $("#txt").css("color", "#ff0000");
-      fontcolor = 0;
-      tick2 = 0;
+  $("#fcolor1").click(function() {
+    $("#txt").css("color", "#ff0000");
+    fontcolor = 0;
+    tick2 = 0;
   });
-  $("#fcolor2").click(function () {
-      $("#txt").css("color", "#000000");
-      fontcolor = 1;
-      tick2 = 1;
+  $("#fcolor2").click(function() {
+    $("#txt").css("color", "#000000");
+    fontcolor = 1;
+    tick2 = 1;
   });
-  $("#fcolor3").click(function () {
-      $("#txt").css("color", "#FFFFFF");
-      fontcolor = 2;
-      tick2 = 2;
+  $("#fcolor3").click(function() {
+    $("#txt").css("color", "#FFFFFF");
+    fontcolor = 2;
+    tick2 = 2;
   });
-  $("#fcolor4").click(function () {
-      $("#txt").css("color", "#FFFF00");
-      fontcolor = 3;
-      tick2 = 3;
+  $("#fcolor4").click(function() {
+    $("#txt").css("color", "#FFFF00");
+    fontcolor = 3;
+    tick2 = 3;
   });
-  $("#fcolor5").click(function () {
-      $("#txt").css("color", "#00FF00");
-      fontcolor = 4;
-      tick2 = 4;
+  $("#fcolor5").click(function() {
+    $("#txt").css("color", "#00FF00");
+    fontcolor = 4;
+    tick2 = 4;
   });
-  $("#fcolor6").click(function () {
-      $("#txt").css("color", "#6fdcff");
-      fontcolor = 5;
-      tick2 = 5;
+  $("#fcolor6").click(function() {
+    $("#txt").css("color", "#6fdcff");
+    fontcolor = 5;
+    tick2 = 5;
   });
   $("#ft_color ul li").click(function() {
     //The existing tick image is removed. New tick image is added beside the option that is selcected
-      $("."+tick2).remove();
-      $img2.appendTo("#fcolor"+(tick2+1));
+    $("." + tick2).remove();
+    $img2.appendTo("#fcolor" + (tick2 + 1));
   });
 
 
   //Font-size Customisation
-  $("#fsize1").click(function () {
-      $("#txt").css("font-size", "16px");
-      tick3 = 0;
+  $("#fsize1").click(function() {
+    $("#txt").css("font-size", "16px");
+    tick3 = 0;
   });
-  $("#fsize2").click(function () {
-      $("#txt").css("font-size", "14px");
-      tick3 = 1;
+  $("#fsize2").click(function() {
+    $("#txt").css("font-size", "14px");
+    tick3 = 1;
   });
-  $("#fsize3").click(function () {
-      $("#txt").css("font-size", "12px");
-      tick3 = 2;
+  $("#fsize3").click(function() {
+    $("#txt").css("font-size", "12px");
+    tick3 = 2;
   });
   $("#ft_size ul li").click(function() {
     //The existing tick image is removed. New tick image is added beside the option that is selcected
-      $("."+tick3).remove();
-      $img3.appendTo("#fsize"+(tick3+1));
+    $("." + tick3).remove();
+    $img3.appendTo("#fsize" + (tick3 + 1));
   });
 
   //Themes Customisation
-  $("#t1").click(function () {
-      $("body").css("background-color", "#EBEBEB");
-      $(".button").css("background-color", "#EBEBEB");
-      $(".4").remove();
-      $img4.appendTo(this); //Tick is added beside this option when selected
-      tick4 = 0;  //Index of the tick image
+  $("#t1").click(function() {
+    $("body").css("background-color", "#EBEBEB");
+    $(".button").css("background-color", "#EBEBEB");
+    $(".4").remove();
+    $img4.appendTo(this); //Tick is added beside this option when selected
+    tick4 = 0; //Index of the tick image
   });
-  $("#t2").click(function () {
-      $("body").css("background-color", "#FFFFFF");
-      $(".button").css("background-color", "#FFFFFF");
-      $(".4").remove();
-      $img4.appendTo(this);
-      tick4 = 1;
+  $("#t2").click(function() {
+    $("body").css("background-color", "#FFFFFF");
+    $(".button").css("background-color", "#FFFFFF");
+    $(".4").remove();
+    $img4.appendTo(this);
+    tick4 = 1;
   });
-  $("#t3").click(function () {
-      $("body").css("background-color", "#912573");
-      $(".button").css("background-color", "#912573");
-      $(".4").remove();
-      $img4.appendTo(this);
-      tick4 = 2;
+  $("#t3").click(function() {
+    $("body").css("background-color", "#912573");
+    $(".button").css("background-color", "#912573");
+    $(".4").remove();
+    $img4.appendTo(this);
+    tick4 = 2;
   });
-  $("#t4").click(function () {
-      $("body").css("background-color", "#FFA500");
-      $(".button").css("background-color", "#FFFFFF");
-      $(".4").remove();
-      $img4.appendTo(this);
-      tick4 = 3;
+  $("#t4").click(function() {
+    $("body").css("background-color", "#FFA500");
+    $(".button").css("background-color", "#FFFFFF");
+    $(".4").remove();
+    $img4.appendTo(this);
+    tick4 = 3;
   });
-  $("#t5").click(function () {
-      $("body").css("background-color", "#FFF977");
-      $(".button").css("background-color", "#FFF977");
-      $(".4").remove();
-      $img4.appendTo(this);
-      tick4 = 4;
+  $("#t5").click(function() {
+    $("body").css("background-color", "#FFF977");
+    $(".button").css("background-color", "#FFF977");
+    $(".4").remove();
+    $img4.appendTo(this);
+    tick4 = 4;
   });
-  $("#t6").click(function () {
-      $("body").css("background-color", "#D7EAFB");
-      $(".button").css("background-color", "#D7EAFB");
-      $(".4").remove();
-      $img4.appendTo(this);
-      tick4 = 5;
+  $("#t6").click(function() {
+    $("body").css("background-color", "#D7EAFB");
+    $(".button").css("background-color", "#D7EAFB");
+    $(".4").remove();
+    $img4.appendTo(this);
+    tick4 = 5;
   });
   //The above section is devoted to styling when the customisation list items are selected.
-  $overlay.click(function () {
+  $overlay.click(function() {
     $(".lightbox").hide(400);
     $(this).hide();
     storeData(); //Data saves when the overlay is selected
   });
 
   function storeData() {
-    console.log(noteArray);
     //indexOf does not work for multi-dimensional arrays, had to use a for loop instead
-    for(var i = 0; i < noteArray.length; i++) {
-      if(noteArray[i][2] === "") { //if Notepad name is empty, it is set to "Blank"
+    for (var i = 0; i < noteArray.length; i++) {
+      if (noteArray[i][2] === "") { //if Notepad name is empty, it is set to "Blank"
         noteArray[i][2] = "Blank";
         $("#scroll ul li").children("p").html(noteArray[i][2]);
         storeData();
       }
     }
     if (noteArray.length === 0) { //if all the Notepads are deleted, a blank one is created
-      noteArray = [[]];
+      noteArray = [
+        []
+      ];
       noteArray[0][0] = 1;
       noteArray[0][1] = "";
       noteArray[0][2] = "Blank";
@@ -210,13 +213,12 @@ var enter;
     localStorage.setItem("tick3", tick3);
     localStorage.setItem("tick4", tick4);
 
-    $img5.appendTo("#scroll ul li:eq("+noteNum+")");
+    $img5.appendTo("#scroll ul li:eq(" + noteNum + ")");
     noteNum = parseInt(localStorage.getItem("noteNum"));
     //The textarea content is saved into noteArray as the content of the current Notepad
     noteArray[noteNum][1] = txt.value;
-    console.log(noteArray[noteNum][1]);
     //Notepad name is saved into noteArray
-    noteArray[noteNum][2] = $("#scroll ul li:eq("+ noteNum +")").children("p").html();
+    noteArray[noteNum][2] = $("#scroll ul li:eq(" + noteNum + ")").children("p").html();
     //noteArray is saved in localStorage
     localStorage.setItem("notes", JSON.stringify(noteArray));
 
@@ -224,6 +226,7 @@ var enter;
     if (height < 400) height = 400;
     txt.style.height = height + "px";
   }
+
   function init() {
     //The following statement is set to run only once, when the extension is first opened.
     if (!Boolean(localStorage.getItem("once"))) {
@@ -232,7 +235,7 @@ var enter;
       storeData();
     }
     $('html').bind('keypress', function(e) {
-      if(e.keyCode == 13) {
+      if (e.keyCode == 13) {
         enter = true; //Allows the renaming function to occur
       }
     });
@@ -241,9 +244,9 @@ var enter;
     //"Plus" button functionality
     $("#plus").click(function() {
       //Pushes blank notepad details into the last row of the array.
-      noteArray.push([parseInt(noteArray[noteArray.length - 1]) + 1,"","Blank"]);
+      noteArray.push([parseInt(noteArray[noteArray.length - 1]) + 1, "", "Blank"]);
       //Adds new notepad item into "Organisation" lightbox
-      $("#scroll ul").append("<li id='"+noteArray[noteArray.length - 1][0]+"'><p>"+noteArray[noteArray.length - 1][2]+"</p></li>");
+      $("#scroll ul").append("<li id='" + noteArray[noteArray.length - 1][0] + "'><p>" + noteArray[noteArray.length - 1][2] + "</p></li>");
     });
     $("#delete").click(function() { //When "delete" button is clicked
       deleteClick = true;
@@ -257,8 +260,8 @@ var enter;
         $(this).remove(); //Notepad item removed from DOM
         $("#scroll ul li").css("color", "#bfbfbf"); //Notepad names are reverted back to their original color
         //indexOf() does not work for multi-dimensional array.
-        for(var i2 = 0; i2 < noteArray.length; i2++) {
-          if(noteArray[i2][0] == $liID) {
+        for (var i2 = 0; i2 < noteArray.length; i2++) {
+          if (noteArray[i2][0] == $liID) {
             noteDelete = i2; //noteDelete is equal to the noteArray index of the selected Notepad
             break;
           }
@@ -269,14 +272,14 @@ var enter;
         } else if (noteNum == noteDelete && noteArray.length !== 0) { //If the deleted notepad is the one that is in use
           noteNum = 0;
           txt.value = noteArray[0][1];
-          $img5.appendTo("#scroll ul li:eq("+noteNum+")");
+          $img5.appendTo("#scroll ul li:eq(" + noteNum + ")");
         }
         storeData();
       } else {
-        for(var i = 0; i < noteArray.length; i++) { //indexOf does not work for multi-dimensional arrays
-          if(noteArray[i][0] == $liID) {
+        for (var i = 0; i < noteArray.length; i++) { //indexOf does not work for multi-dimensional arrays
+          if (noteArray[i][0] == $liID) {
             noteNum = i; //noteNum is equal to the index of the array that is in use
-            $img5.appendTo("#scroll ul li:eq("+noteNum+")"); //Tick image is added beside the selectd notepad
+            $img5.appendTo("#scroll ul li:eq(" + noteNum + ")"); //Tick image is added beside the selectd notepad
             localStorage.setItem("noteNum", noteNum);
             txt.value = noteArray[noteNum][1]; //value of textarea is set to the content of the current notepad
           }
@@ -287,7 +290,7 @@ var enter;
           storeData();
         }
         if (enter) { //If enter button was clicked
-          $(this).children("p").attr("contenteditable","true");
+          $(this).children("p").attr("contenteditable", "true");
           enter = false;
           storeData();
         }
@@ -310,28 +313,31 @@ var enter;
     tick3 = localStorage.getItem("tick3");
     tick4 = localStorage.getItem("tick4");
 
-    $img.appendTo("#ft_style ul li:eq("+ tick1 +")"); //nth-child method deprecated
-    $img2.appendTo("#ft_color ul li:eq("+ tick2 +")");
-    $img3.appendTo("#ft_size ul li:eq("+ tick3 +")");
-    $img4.appendTo("#themes ul li:eq("+ tick4 +")");
+    $img.appendTo("#ft_style ul li:eq(" + tick1 + ")"); //nth-child method deprecated
+    $img2.appendTo("#ft_color ul li:eq(" + tick2 + ")");
+    $img3.appendTo("#ft_size ul li:eq(" + tick3 + ")");
+    $img4.appendTo("#themes ul li:eq(" + tick4 + ")");
     //Adds all notepad items into the "Organisation" lightbox when the extension is first opened
   }
+
   function init2() {
-    for (num=0; noteArray!==null && noteArray.length > 0 && num < noteArray.length; num++) {
-       $("#scroll ul").append("<li id='"+noteArray[num][0]+"'><p></p></li>");
-       $("#scroll ul li:eq("+ num +")").children("p").html(noteArray[num][2]);
+    for (num = 0; noteArray !== null && noteArray.length > 0 && num < noteArray.length; num++) {
+      $("#scroll ul").append("<li id='" + noteArray[num][0] + "'><p></p></li>");
+      $("#scroll ul li:eq(" + num + ")").children("p").html(noteArray[num][2]);
     }
     tick5 = localStorage.getItem("tick5");
-    $img5.appendTo("#scroll ul li:eq("+ noteNum +")");
+    $img5.appendTo("#scroll ul li:eq(" + noteNum + ")");
     txt.onkeyup = storeData;
     storeData();
   }
 
   //Most of the code content below was taken from other sources
   //"Download" button functionality
-  $("#download").click(function () {
-    var savedText = document.getElementById("txt").value;
-    var textBlob = new Blob([savedText], {type:'text/plain; charset=UTF-8'});
+  $("#download").click(function() {
+    var savedText = txt.value;
+    var textBlob = new Blob([savedText], {
+      type: 'text/plain; charset=UTF-8'
+    });
     var downloadLink = document.createElement("a");
     downloadLink.download = noteArray[noteNum][2];
     downloadLink.innerHTML = "HiddenLink";
@@ -343,6 +349,7 @@ var enter;
     document.body.appendChild(downloadLink);
     downloadLink.click();
   });
+
   function destroyLink(event) {
     document.body.removeChild(event.target);
   }
