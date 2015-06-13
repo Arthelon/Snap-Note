@@ -236,7 +236,13 @@ var enter;
     }
     $('html').bind('keypress', function(e) {
       if (e.keyCode == 13) {
-        enter = true; //Allows the renaming function to occur
+        if (!enter) {
+          enter = true; //Allows the renaming function to occur
+        } else if (enter) {
+          e.preventDefault();
+          enter = false;
+          close();
+        }
       }
     });
     //localStorage only returns String so noteArray has to be converted into JSON format before being reverted back to an array.
@@ -285,13 +291,10 @@ var enter;
           }
         }
         if (!enter && !deleteClick) { //If delete and enter button were not clicked
-          $(".lightbox").hide(400);
-          $("#overlay").hide();
-          storeData();
+          close();
         }
         if (enter) { //If enter button was clicked
           $(this).children("p").attr("contenteditable", "true");
-          enter = false;
           storeData();
         }
       }
@@ -349,6 +352,12 @@ var enter;
     document.body.appendChild(downloadLink);
     downloadLink.click();
   });
+
+  function close() {
+    $(".lightbox").hide(400);
+    $("#overlay").hide();
+    storeData();
+  }
 
   function destroyLink(event) {
     document.body.removeChild(event.target);
