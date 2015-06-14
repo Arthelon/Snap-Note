@@ -1,5 +1,5 @@
 * {
-  font-family: Lato;
+  font-family: Lato, Lato-Light;
 }
 body {
   height: 370px;
@@ -14,7 +14,7 @@ body {
   font-size: 14px;
   height: 100%;
   width: 100%;
-  font-family: Lato;
+  font-family: Lato, Lato-Light;
 }
 .button {
   float: right;

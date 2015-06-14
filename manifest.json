@@ -1,5 +1,5 @@
 {
-    "name": "Notepad V1.",
+    "name": "Snap Note",
     "version": "0.0.1",
     "manifest_version": 2,
     "description": "A Chrome Extension in the form of a pop-up notepad with various functions",
@@ -10,13 +10,13 @@
          "js/background.js"
            ]
     },
-    "icons": { "16": "images/noteIcon-16.png",
-           "48": "images/noteIcon-48.png",
-          "128": "images/noteIcon.png"
+    "icons": { "16": "images/note-16.png",
+           "48": "images/note-48.png",
+          "128": "images/note-128.png"
     },
     "browser_action": {
-        "default_icon" : "images/noteIcon.png",
-        "default_title": "",
+        "default_icon" : "images/note-128.png",
+        "default_title": "Snap Note",
         "default_popup": "index.html"
     },
     "permissions": [

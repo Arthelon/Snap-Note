@@ -3,7 +3,6 @@ var deleteClick = false; //Used icons "delete" button toggle
 
 var txt = document.getElementById("txt");
 //Array storing all different font colors
-var colors = ["#ff0000", "#000000", "#FFFFFF", "#FFFF00", "#00FF00", "#6fdcff"];
 
 // Tick images
 var $img = $("<img class='tick' src='images/tick.png'/>");
@@ -17,6 +16,7 @@ var tick1 = 2;
 var tick2 = 1;
 var tick3 = 1;
 var tick4 = 4;
+var e;
 noteNum = 0; //Default notepad index in noteArray
 
 //Array in which the notepads are stored in
@@ -32,12 +32,14 @@ noteArray[0][1] = "";
 noteArray[0][2] = "Blank";
 
 var noteDelete;
-var fontcolor;
 var once;
 var enter;
 
 
 (function() {
+  $(".lightbox ul li").click(function() {
+    storeData();
+  });
   //Font-Style Customisation
   $("#fstyle1").click(function() {
     $("#txt").css("font-family", "Crimson Text");
@@ -48,7 +50,7 @@ var enter;
     tick1 = 1;
   });
   $("#fstyle3").click(function() {
-    $("#txt").css("font-family", "Lato");
+    $("#txt").css("font-family", "Lato, Lato-Light");
     tick1 = 2;
   });
   $("#fstyle4").click(function() {
@@ -72,32 +74,26 @@ var enter;
   //Font-Color Customisation
   $("#fcolor1").click(function() {
     $("#txt").css("color", "#ff0000");
-    fontcolor = 0;
     tick2 = 0;
   });
   $("#fcolor2").click(function() {
     $("#txt").css("color", "#000000");
-    fontcolor = 1;
     tick2 = 1;
   });
   $("#fcolor3").click(function() {
     $("#txt").css("color", "#FFFFFF");
-    fontcolor = 2;
     tick2 = 2;
   });
   $("#fcolor4").click(function() {
     $("#txt").css("color", "#FFFF00");
-    fontcolor = 3;
     tick2 = 3;
   });
   $("#fcolor5").click(function() {
     $("#txt").css("color", "#00FF00");
-    fontcolor = 4;
     tick2 = 4;
   });
   $("#fcolor6").click(function() {
     $("#txt").css("color", "#6fdcff");
-    fontcolor = 5;
     tick2 = 5;
   });
   $("#ft_color ul li").click(function() {
@@ -171,9 +167,7 @@ var enter;
   });
   //The above section is devoted to styling when the customisation list items are selected.
   $overlay.click(function() {
-    $(".lightbox").hide(400);
-    $(this).hide();
-    storeData(); //Data saves when the overlay is selected
+    close();
   });
 
   function storeData() {
@@ -207,7 +201,7 @@ var enter;
     localStorage.setItem("theme", document.body.style.backgroundColor);
 
     //Since there is no style fontColor object, I am using an array in its stead.
-    localStorage.setItem("fcolor", colors[fontcolor]);
+    localStorage.setItem("fcolor", txt.style.color);
     localStorage.setItem("tick1", tick1);
     localStorage.setItem("tick2", tick2);
     localStorage.setItem("tick3", tick3);
@@ -260,6 +254,7 @@ var enter;
       $("#scroll ul li").css("color", "#FF0000");
     });
     $("#scroll ul").on("click", "li", function() { //Click event handler is attached to Notepad item
+      e = this;
       var $liID = $(this).attr("id"); //each Notepad's ID is stored in the first column of noteArray
       if (deleteClick) { //If delete function is enabled
         deleteClick = false;
@@ -305,10 +300,9 @@ var enter;
     txt.value = noteArray[noteNum][1];
 
     //Customisations
-    var newColor = localStorage.getItem("fcolor");
     txt.style.fontFamily = localStorage.getItem("fstyle");
     txt.style.fontSize = localStorage.getItem("fsize");
-    $("#txt").css("color", newColor);
+    txt.style.color = localStorage.getItem("fcolor");
     document.body.style.backgroundColor = localStorage.getItem("theme");
 
     tick1 = localStorage.getItem("tick1");
@@ -356,6 +350,10 @@ var enter;
   function close() {
     $(".lightbox").hide(400);
     $("#overlay").hide();
+    if (e !== null) {
+      $(e).children("p").attr("contenteditable", "false");
+    }
+    enter = false;
     storeData();
   }
 

@@ -21,10 +21,15 @@
 @font-face {
   font-family: "Crimson Text";
   font-weight: normal;
-  src:local("Crimson Text"), url(/fonts/CrimsonText-Regular.ttf) format("ttf");
+  src:local("Crimson Text"), url(/fonts/crimsontext-regular-webfont.woff) format("woff");
 }
 @font-face {
   font-family: "Lato"
   font-weight: normal;
-  src:local("Lato"), url(/fonts/Lato-Regular-webfont.woff) format("woff");
+  src:local("Lato"), url(/fonts/lato-regular-webfont.woff) format("woff");
+}
+@font-face {
+  font-family: "Lato-Light"
+  font-weight: normal;
+  src:local("Lato-Light"), url(/fonts/Lato-Light.woff) format("woff");
 }
