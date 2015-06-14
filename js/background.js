@@ -20,16 +20,7 @@ var e;
 noteNum = 0; //Default notepad index in noteArray
 
 //Array in which the notepads are stored in
-noteArray = [
-  []
-];
-
-//Notepad ID
-noteArray[0][0] = 1;
-//Notepad content
-noteArray[0][1] = "";
-//Notepad name
-noteArray[0][2] = "Blank";
+noteArray = [];
 
 var noteDelete;
 var once;
