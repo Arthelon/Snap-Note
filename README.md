@@ -1,11 +1,11 @@
 # Snap-Note
 
-Notepad chrome extension made for convenience
+Notepad chrome extension made for convenient use
 
 ### Features
 
 1. In-built notes browser
-2. Customizable fonts, font-colors, and background-colors
+2. Customizable fonts and colors
 3. Notes can be downloaded as .txt files
 
 ### Installation
