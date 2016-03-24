@@ -4,10 +4,15 @@ Notepad chrome extension made for convenient use
 
 ### Features
 
-1. In-built notes browser
+1. Basic note-taking capabilities, saved in LocalStorage
 2. Customizable fonts and colors
-3. Notes can be downloaded as .txt files
+3. Notes browser system
+4. Downloadable notes
 
 ### Installation
 
-[Installation Link](https://chrome.google.com/webstore/detail/snap-note/bcddlnpbfpldhhgpjkoedhcnjchldcff?authuser=1)
+[Download Here](https://chrome.google.com/webstore/detail/snap-note/bcddlnpbfpldhhgpjkoedhcnjchldcff?authuser=1)
+
+### Requirements
+
+- The Google Chrome browser
