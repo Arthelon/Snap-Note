@@ -108,14 +108,22 @@ body {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
+#fsize4, #fcolor7, #t7 {
+=======
 #t7 {
+>>>>>>> 7f68f791dfe2518c3d7d6b842967795a280dcf1d
     width: 70px;
     margin: 2px 5px 0px 0px;
     font-size: 14px;
     border: none;
     border-bottom: #d6d6d6 0.5px solid;
 }
+<<<<<<< HEAD
+#fcolor7:focus, #fsize4:focus, #t7:focus {
+=======
 #t7:focus {
+>>>>>>> 7f68f791dfe2518c3d7d6b842967795a280dcf1d
   border-bottom: #000000 1px solid;
 }
 
