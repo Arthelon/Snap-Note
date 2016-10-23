@@ -108,14 +108,14 @@ body {
   cursor: pointer;
 }
 
-#t7 {
+#fsize4, #fcolor7, #t7 {
     width: 70px;
     margin: 2px 5px 0px 0px;
     font-size: 14px;
     border: none;
     border-bottom: #d6d6d6 0.5px solid;
 }
-#t7:focus {
+#fcolor7:focus, #fsize4:focus, #t7:focus {
   border-bottom: #000000 1px solid;
 }
 

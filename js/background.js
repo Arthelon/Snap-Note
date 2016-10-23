@@ -87,6 +87,19 @@ var enter;
     $("#txt").css("color", "#6fdcff");
     tick2 = 5;
   });
+  $("#fcolor7").keydown(function(event) {
+    if (event.which == 13) {
+      var color = document.getElementById("fcolor7").value;
+      color = color.toUpperCase();
+      if (color.charAt(0) == '#' && color.length == 7) {
+        $("#txt").css("color", color);
+        tick2 = 6;
+      }
+      else {
+        console.log("Invalid color.");
+      }
+    }
+  });
   $("#ft_color ul li").click(function() {
     //The existing tick image is removed. New tick image is added beside the option that is selcected
     $("." + tick2).remove();
@@ -106,6 +119,21 @@ var enter;
   $("#fsize3").click(function() {
     $("#txt").css("font-size", "12px");
     tick3 = 2;
+  });
+  $("#fsize4").keydown(function(event) {
+    if (event.which == 13) {
+      var size = document.getElementById("fsize4").value;
+      console.log();
+      if (size % 1 === 0) {
+        size += "px";
+        console.log(size);
+        $("#txt").css("font-size", size);
+        tick3 = 3;
+      }
+      else {
+        console.log("Invalid size.");
+      }
+    }
   });
   $("#ft_size ul li").click(function() {
     //The existing tick image is removed. New tick image is added beside the option that is selcected
@@ -159,7 +187,7 @@ var enter;
   $("#t7").keydown(function(event) {
     if (event.which == 13) {
       var color = document.getElementById("t7").value;
-      color = color.trim().toUpperCase();
+      color = color.toUpperCase();
       if (color.charAt(0) == '#' && color.length == 7) {
         $("body").css("background-color", color);
         $(".button").css("background-color", color);
@@ -238,7 +266,8 @@ var enter;
       if (e.keyCode == 13) {
         if (!enter) {
           enter = true; //Allows the renaming function to occur
-        } else if (enter) {
+        } 
+        else if (enter) {
           e.preventDefault();
           enter = false;
           close();
