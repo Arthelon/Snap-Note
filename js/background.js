@@ -129,15 +129,15 @@ var enter;
     tick4 = 1;
   });
   $("#t3").click(function() {
-    $("body").css("background-color", "#912573");
-    $(".button").css("background-color", "#912573");
+    $("body").css("background-color", "#DDBDFB");
+    $(".button").css("background-color", "#DDBDFB");
     $(".4").remove();
     $img4.appendTo(this);
     tick4 = 2;
   });
   $("#t4").click(function() {
-    $("body").css("background-color", "#FFA500");
-    $(".button").css("background-color", "#FFFFFF");
+    $("body").css("background-color", "#FFAE49");
+    $(".button").css("background-color", "#FFAE49");
     $(".4").remove();
     $img4.appendTo(this);
     tick4 = 3;
@@ -155,6 +155,21 @@ var enter;
     $(".4").remove();
     $img4.appendTo(this);
     tick4 = 5;
+  });
+  $("#t7").keydown(function(event) {
+    if (event.which == 13) {
+      var color = document.getElementById("t7").value;
+      color = color.trim().toUpperCase();
+      if (color.charAt(0) == '#' && color.length == 7) {
+        $("body").css("background-color", color);
+        $(".button").css("background-color", color);
+        $img4.appendTo(this);
+        tick4 = 6;
+      }
+      else {
+        console.log("Invalid color.");
+      }
+    }
   });
   //The above section is devoted to styling when the customisation list items are selected.
   $overlay.click(function() {
