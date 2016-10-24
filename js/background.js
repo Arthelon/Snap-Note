@@ -92,9 +92,22 @@ var enter;
     $("." + tick2).remove();
     $img2.appendTo("#fcolor" + (tick2 + 1));
   });
+  $("#fcolor7").keydown(function(event) {
+    if (event.which == 13) {
+      var color = document.getElementById("fcolor7").value;
+      if (/^#[0-9A-F]{6}$/i.test(color) || getColorCSS(color)) {  //Checks if input is valid hex value or CSS color
+        $("#txt").css("color", color);
+        tick2 = 6;
+        $("." + tick2).remove();
+        $img2.appendTo("#fc7");
+      }
+      else {
+        $("#fcolor-warn").fadeIn().delay(2000).fadeOut();
+      }
+    }
+  });
 
-
-  //Font-size Customisation
+  //Font-Size Customisation
   $("#fsize1").click(function() {
     $("#txt").css("font-size", "16px");
     tick3 = 0;
@@ -112,50 +125,90 @@ var enter;
     $("." + tick3).remove();
     $img3.appendTo("#fsize" + (tick3 + 1));
   });
+  $("#fsize4").keydown(function(event) {
+    if (event.which == 13) {
+      var size = document.getElementById("fsize4").value;
+      console.log();
+      if (/^\d$/.test(size)) {
+        size += "px";
+        console.log(size);
+        $("#txt").css("font-size", size);
+        tick3 = 3;
+        $("." + tick3).remove();
+        $img3.appendTo("#fs4");
+      }
+      else {
+        $("#fsize-warn").fadeIn().delay(2000).fadeOut();
+      }
+    }
+  });
 
   //Themes Customisation
   $("#t1").click(function() {
     $("body").css("background-color", "#EBEBEB");
     $(".button").css("background-color", "#EBEBEB");
-    $(".4").remove();
+    $("." + tick4).remove();
     $img4.appendTo(this); //Tick is added beside this option when selected
     tick4 = 0; //Index of the tick image
   });
   $("#t2").click(function() {
     $("body").css("background-color", "#FFFFFF");
     $(".button").css("background-color", "#FFFFFF");
-    $(".4").remove();
+    $("." + tick4).remove();
     $img4.appendTo(this);
     tick4 = 1;
   });
   $("#t3").click(function() {
-    $("body").css("background-color", "#912573");
-    $(".button").css("background-color", "#912573");
-    $(".4").remove();
+    $("body").css("background-color", "#DDBDFB");
+    $(".button").css("background-color", "#DDBDFB");
+    $("." + tick4).remove();
     $img4.appendTo(this);
     tick4 = 2;
   });
   $("#t4").click(function() {
-    $("body").css("background-color", "#FFA500");
-    $(".button").css("background-color", "#FFFFFF");
-    $(".4").remove();
+    $("body").css("background-color", "#FFAE49");
+    $(".button").css("background-color", "#FFAE49");
+    $("." + tick4).remove();
     $img4.appendTo(this);
     tick4 = 3;
   });
   $("#t5").click(function() {
     $("body").css("background-color", "#FFF977");
     $(".button").css("background-color", "#FFF977");
-    $(".4").remove();
+    $("." + tick4).remove();
     $img4.appendTo(this);
     tick4 = 4;
   });
   $("#t6").click(function() {
     $("body").css("background-color", "#D7EAFB");
     $(".button").css("background-color", "#D7EAFB");
-    $(".4").remove();
+    $("." + tick4).remove();
     $img4.appendTo(this);
     tick4 = 5;
   });
+  $("#t7").keydown(function(event) {
+    if (event.which == 13) {
+      var color = document.getElementById("t7").value;
+      if (/^#[0-9A-F]{6}$/i.test(color) || getColorCSS(color)) {
+        $("body").css("background-color", color);
+        $(".button").css("background-color", color);
+        tick4 = 6;
+        $("." + tick4).remove();
+        $img4.appendTo("#th7");
+      }
+      else {
+        $("#t-warn").fadeIn().delay(2000).fadeOut();
+      }
+    }
+  });
+
+  //This function checks if string inputted is a valid CSS color (from http://stackoverflow.com/questions/6386090/validating-css-color-names)
+  function getColorCSS(c) {
+    var ele = document.createElement("div");
+    ele.style.color = c;
+    return ele.style.color.split(/\s+/).join('').toLowerCase();
+  };
+
   //The above section is devoted to styling when the customisation list items are selected.
   $overlay.click(function() {
     close();
@@ -223,7 +276,8 @@ var enter;
       if (e.keyCode == 13) {
         if (!enter) {
           enter = true; //Allows the renaming function to occur
-        } else if (enter) {
+        } 
+        else if (enter) {
           e.preventDefault();
           enter = false;
           close();

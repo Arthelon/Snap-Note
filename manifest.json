@@ -2,17 +2,18 @@
     "name": "Snap Note",
     "version": "0.0.1",
     "manifest_version": 2,
-    "description": "A Chrome Extension in the form of a pop-up notepad with various functions",
+    "description": "A Chrome Extension in the form of a pop-up notepad with various functions.",
     "author": "Daniel Hsing",
     "offline_enabled": true,
     "background": {
      "scripts": [
-         "js/background.js"
-           ]
+        "js/background.js"
+        ]
     },
-    "icons": { "16": "images/note-16.png",
-           "48": "images/note-48.png",
-          "128": "images/note-128.png"
+    "icons": { 
+        "16": "images/note-16.png",
+        "48": "images/note-48.png",
+        "128": "images/note-128.png"
     },
     "browser_action": {
         "default_icon" : "images/note-128.png",
@@ -23,6 +24,6 @@
         "background", "unlimitedStorage", "tabs"
     ],
     "web_accessible_resources": [
-    "index.html","js/popup.js"
+        "index.html","js/popup.js"
     ]
 }
