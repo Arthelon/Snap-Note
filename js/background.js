@@ -188,6 +188,7 @@ var enter;
     if (event.which == 13) {
       var color = document.getElementById("t7").value;
       color = color.toUpperCase();
+      color = color.trim().toUpperCase();
       if (color.charAt(0) == '#' && color.length == 7) {
         $("body").css("background-color", color);
         $(".button").css("background-color", color);
