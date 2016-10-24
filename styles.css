@@ -119,6 +119,12 @@ body {
   border-bottom: #000000 1px solid;
 }
 
+#fcolor-warn, #fsize-warn, #t-warn {
+  display: none;
+  font-size: 13px;
+  color: red;
+}
+
 /** Overlay & Lightbox **/
 
 .lightbox {
