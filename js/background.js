@@ -202,7 +202,7 @@ var enter;
     }
   });
 
-  //This function checks if string inputted is a valid CSS color
+  //This function checks if string inputted is a valid CSS color (from http://stackoverflow.com/questions/6386090/validating-css-color-names)
   function getColorCSS(c) {
     var ele = document.createElement("div");
     ele.style.color = c;
